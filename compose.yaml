@@ -1,0 +1,26 @@
+services:
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+    ports:
+      - 3306:3306
+  api-app:
+    build:
+      context: .
+    ports:
+      - 5000:5000
+      - 9229:9229
+    volumes:
+      - .:/app
+    environment:
+      NODE_ENV: development
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+    depends_on:
+      - db
