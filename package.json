@@ -1,0 +1,17 @@
+{
+  "name": "api-app",
+  "version": "1.0.0",
+  "description": "When you're ready, start your application by running: `docker compose up --build`.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon --legacy-watch --inspect=0.0.0.0:9229 -w ./ index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+      "dotenv": "^16.4.7"
+  }
+}
