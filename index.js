@@ -1,7 +1,8 @@
-const express = require("express");
-const dotenv = require("dotenv");
-const jwt = require("jsonwebtoken");
-const { Sequelize } = require("sequelize");
+import express from "express";
+import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
+import { Sequelize } from "sequelize";
+import authRoutes from "./Routes/auth.js";
 
 const sequelize = new Sequelize(
   process.env.DB_NAME,
@@ -12,7 +13,6 @@ const sequelize = new Sequelize(
     dialect: "mysql",
   }
 );
-const authRoutes = require("./routes/auth");
 app.use("/auth", authRoutes);
 
 module.exports = sequelize;

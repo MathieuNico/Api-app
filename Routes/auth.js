@@ -1,10 +1,12 @@
-const express = require("express");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const User = require("../models/User");
+import express from "express";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
+// Importer ton modèle User (ajuste le chemin en fonction de l'emplacement de ton fichier)
+import User from "../models/User.js";
 
 const router = express.Router();
 
+// Route d'inscription
 router.post("/register", async (req, res) => {
   const hashedPassword = await bcrypt.hash(req.body.password, 10);
   try {
@@ -18,6 +20,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
+// Route de connexion
 router.post("/login", async (req, res) => {
   const user = await User.findOne({ where: { username: req.body.username } });
   if (!user || !(await bcrypt.compare(req.body.password, user.password))) {
@@ -32,4 +35,5 @@ router.post("/login", async (req, res) => {
   res.json({ token });
 });
 
-module.exports = router;
+// Exporter le routeur avec 'export default'
+export default router;
